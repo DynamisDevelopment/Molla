@@ -1,8 +1,7 @@
 {
-  "name": "react-molla",
+  "name": "molla",
   "version": "0.1.3",
-  "private": true,
-  "homepage": "https://d-themes.com/react/molla/demo-14",
+  "homepage": "",
   "basename": "/",
   "dependencies": {
     "@babel/core": "^7.1.0",
