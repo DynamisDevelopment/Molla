@@ -5,8 +5,6 @@
   "homepage": "",
   "basename": "/",
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
     "test": "cd ./Backend && yarn test:prod"
   }
 }
