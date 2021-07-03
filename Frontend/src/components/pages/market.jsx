@@ -131,9 +131,7 @@ function ShopMarket(props) {
 const Product = ({ name, img, i }) => (
   <div className="col-6 col-md-4 col-lg-3" key={i}>
     <Link
-      to={`${
-        process.env.PUBLIC_URL
-      }/shop/list?product=${name.toLowerCase().replace(' ', '-')}`}
+      to={`${process.env.PUBLIC_URL}/shop/list?product=${name}`}
       className="cat-block"
     >
       <figure>

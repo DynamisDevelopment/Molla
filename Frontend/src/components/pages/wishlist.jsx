@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 
 // import Custom Components
+import Layout from '../app'
 import PageHeader from '../common/page-header'
 import Breadcrumb from '../common/breadcrumb'
 
@@ -57,16 +58,16 @@ function Wishlist(props) {
   }
 
   return (
-    <>
+    <Layout>
       <Helmet>
-        <title>Molla React eCommerce Template | Wishlist</title>
+        <title>Molla React eCommerce | Wishlist</title>
       </Helmet>
 
-      <h1 className="d-none">Molla React eCommerce Template - Wishlist</h1>
+      <h1 className="d-none">Molla React eCommerce - Wishlist</h1>
 
       <div className="main">
         <PageHeader title="Wishlist" subTitle="Shop" />
-        <Breadcrumb title="Wishlist" parent1={['Shop', 'shop/sidebar/list']} />
+        <Breadcrumb title="Wishlist" />
 
         <div className="page-content">
           <div className="container">
@@ -241,7 +242,7 @@ function Wishlist(props) {
           </div>
         </div>
       </div>
-    </>
+    </Layout>
   )
 }
 

@@ -16,6 +16,8 @@ const Wishlist = React.lazy(() => import('../components/pages/wishlist'))
 const Cart = React.lazy(() => import('../components/pages/cart'))
 const Checkout = React.lazy(() => import('../components/pages/checkout'))
 const ProductList = React.lazy(() => import('../components/pages/productList'))
+const Login = React.lazy(() => import('../components/pages/others/login'))
+const noMatch = React.lazy(() => import('../components/pages/404'))
 
 export default function AppRoot() {
   useEffect(() => scrollTop(), [])
@@ -66,15 +68,21 @@ export default function AppRoot() {
           />
           <Route
             exact
-            path={`${process.env.PUBLIC_URL}/categories/:fullwidth`}
+            path={`${process.env.PUBLIC_URL}/categories`}
             component={Categories}
           />
-
           <Route
             exact
             path={`${process.env.PUBLIC_URL}/shop/list`}
             component={ProductList}
           />
+          <Route
+            exact
+            path={`${process.env.PUBLIC_URL}/login`}
+            component={Login}
+          />
+
+          <Route exact path="*" component={noMatch} />
         </Switch>
       </BrowserRouter>
     </Suspense>
