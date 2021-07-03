@@ -10,12 +10,12 @@ const ProductPages = React.lazy(() => import('./products-route.js'))
 const Blog = React.lazy(() => import('../components/pages/blog'))
 const About = React.lazy(() => import('../components/pages/about'))
 const Contact = React.lazy(() => import('../components/pages/contact'))
-
 const Categories = React.lazy(() => import('../components/pages/categories'))
 const Account = React.lazy(() => import('../components/pages/dashboard'))
 const Wishlist = React.lazy(() => import('../components/pages/wishlist'))
 const Cart = React.lazy(() => import('../components/pages/cart'))
 const Checkout = React.lazy(() => import('../components/pages/checkout'))
+const ProductList = React.lazy(() => import('../components/pages/productList'))
 
 export default function AppRoot() {
   useEffect(() => scrollTop(), [])
@@ -29,12 +29,12 @@ export default function AppRoot() {
             component={ProductPages}
           />
           <Route
-            exact={true}
+            exact
             path={`${process.env.PUBLIC_URL}/`}
             component={HomePage}
           />
           <Route
-            exact={true}
+            exact
             path={`${process.env.PUBLIC_URL}/shop`}
             component={Market}
           />
@@ -68,6 +68,12 @@ export default function AppRoot() {
             exact
             path={`${process.env.PUBLIC_URL}/categories/:fullwidth`}
             component={Categories}
+          />
+
+          <Route
+            exact
+            path={`${process.env.PUBLIC_URL}/shop/list`}
+            component={ProductList}
           />
         </Switch>
       </BrowserRouter>

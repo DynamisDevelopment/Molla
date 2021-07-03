@@ -19,10 +19,10 @@ function ShopMarket(props) {
   return (
     <Layout>
       <Helmet>
-        <title>Molla React eCommerce Template | Shop Market</title>
+        <title>Molla React eCommerce | Shop Market</title>
       </Helmet>
 
-      <h1 className="d-none">Molla React eCommerce Template - Shop Market</h1>
+      <h1 className="d-none">Molla React eCommerce - Shop Market</h1>
 
       <div className="main shop-market">
         <PageHeader title={'Shop Market'} subTitle="Shop" />
@@ -105,135 +105,9 @@ function ShopMarket(props) {
 
                 <div className="cat-blocks-container">
                   <div className="row">
-                    <div className="col-6 col-md-4 col-lg-3">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/shop/sidebar/list`}
-                        className="cat-block"
-                      >
-                        <figure>
-                          <span>
-                            <img
-                              src={`${process.env.PUBLIC_URL}/assets/images/market/cats/1.jpg`}
-                              alt="Category"
-                            />
-                          </span>
-                        </figure>
-
-                        <h3 className="cat-block-title">Desktop Computers</h3>
-                      </Link>
-                    </div>
-
-                    <div className="col-6 col-md-4 col-lg-3">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/shop/sidebar/list`}
-                        className="cat-block"
-                      >
-                        <figure>
-                          <span>
-                            <img
-                              src={`${process.env.PUBLIC_URL}/assets/images/market/cats/2.jpg`}
-                              alt="Category"
-                            />
-                          </span>
-                        </figure>
-
-                        <h3 className="cat-block-title">Monitors</h3>
-                      </Link>
-                    </div>
-
-                    <div className="col-6 col-md-4 col-lg-3">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/shop/sidebar/list`}
-                        className="cat-block"
-                      >
-                        <figure>
-                          <span>
-                            <img
-                              src={`${process.env.PUBLIC_URL}/assets/images/market/cats/3.jpg`}
-                              alt="Category"
-                            />
-                          </span>
-                        </figure>
-
-                        <h3 className="cat-block-title">Laptops</h3>
-                      </Link>
-                    </div>
-
-                    <div className="col-6 col-md-4 col-lg-3">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/shop/sidebar/list`}
-                        className="cat-block"
-                      >
-                        <figure>
-                          <span>
-                            <img
-                              src={`${process.env.PUBLIC_URL}/assets/images/market/cats/4.jpg`}
-                              alt="Category"
-                            />
-                          </span>
-                        </figure>
-
-                        <h3 className="cat-block-title">iPads & Tablets</h3>
-                      </Link>
-                    </div>
-
-                    <div className="col-6 col-md-4 col-lg-3">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/shop/sidebar/list`}
-                        className="cat-block"
-                      >
-                        <figure>
-                          <span>
-                            <img
-                              src={`${process.env.PUBLIC_URL}/assets/images/market/cats/5.jpg`}
-                              alt="Category"
-                            />
-                          </span>
-                        </figure>
-
-                        <h3 className="cat-block-title">
-                          Hard Drives & Storage
-                        </h3>
-                      </Link>
-                    </div>
-
-                    <div className="col-6 col-md-4 col-lg-3">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/shop/sidebar/list`}
-                        className="cat-block"
-                      >
-                        <figure>
-                          <span>
-                            <img
-                              src={`${process.env.PUBLIC_URL}/assets/images/market/cats/6.jpg`}
-                              alt="Category"
-                            />
-                          </span>
-                        </figure>
-
-                        <h3 className="cat-block-title">Printers & Supplies</h3>
-                      </Link>
-                    </div>
-
-                    <div className="col-6 col-md-4 col-lg-3">
-                      <Link
-                        to={`${process.env.PUBLIC_URL}/shop/sidebar/list`}
-                        className="cat-block"
-                      >
-                        <figure>
-                          <span>
-                            <img
-                              src={`${process.env.PUBLIC_URL}/assets/images/market/cats/7.jpg`}
-                              alt="Category"
-                            />
-                          </span>
-                        </figure>
-
-                        <h3 className="cat-block-title">
-                          Computer Accessories
-                        </h3>
-                      </Link>
-                    </div>
+                    {products.map((product, i) => (
+                      <Product name={product.name} img={product.img} key={i} />
+                    ))}
                   </div>
                 </div>
 
@@ -253,5 +127,56 @@ function ShopMarket(props) {
     </Layout>
   )
 }
+
+const Product = ({ name, img, i }) => (
+  <div className="col-6 col-md-4 col-lg-3" key={i}>
+    <Link
+      to={`${
+        process.env.PUBLIC_URL
+      }/shop/list?product=${name.toLowerCase().replace(' ', '-')}`}
+      className="cat-block"
+    >
+      <figure>
+        <span>
+          <img src={img} alt="Category" />
+        </span>
+      </figure>
+
+      <h3 className="cat-block-title">{name}</h3>
+    </Link>
+  </div>
+)
+
+const products = [
+  {
+    name: 'Desktop Computers',
+    img: `${process.env.PUBLIC_URL}/assets/images/market/cats/1.jpg`,
+  },
+  {
+    name: 'Monitors',
+    img: `${process.env.PUBLIC_URL}/assets/images/market/cats/2.jpg`,
+  },
+  {
+    name: 'Laptops',
+    img: `${process.env.PUBLIC_URL}/assets/images/market/cats/3.jpg`,
+  },
+
+  {
+    name: 'iPads & Tablets',
+    img: `${process.env.PUBLIC_URL}/assets/images/market/cats/4.jpg`,
+  },
+  {
+    name: 'Hard Drives & Storage',
+    img: `${process.env.PUBLIC_URL}/assets/images/market/cats/5.jpg`,
+  },
+  {
+    name: 'Computer Accessories',
+    img: `${process.env.PUBLIC_URL}/assets/images/market/cats/7.jpg`,
+  },
+  {
+    name: 'Printer and Supplies',
+    img: `${process.env.PUBLIC_URL}/assets/images/market/cats/6.jpg`,
+  },
+]
 
 export default React.memo(ShopMarket)
