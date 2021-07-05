@@ -62,10 +62,7 @@ function Cart(props) {
 
       <div className="main">
         <PageHeader title="Shopping Cart" subTitle="Shop" />
-        <Breadcrumb
-          title="Shopping Cart"
-          parent1={['Shop', 'shop/sidebar/list']}
-        />
+        <Breadcrumb title="Shopping Cart" parent1={['Shop', 'shop']} />
 
         <div className="page-content">
           <div className="cart">

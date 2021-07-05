@@ -18,6 +18,7 @@ const Checkout = React.lazy(() => import('../components/pages/checkout'))
 const ProductList = React.lazy(() => import('../components/pages/productList'))
 const Login = React.lazy(() => import('../components/pages/others/login'))
 const noMatch = React.lazy(() => import('../components/pages/404'))
+const Post = React.lazy(() => import('../components/postPage'))
 
 export default function AppRoot() {
   useEffect(() => scrollTop(), [])
@@ -40,7 +41,15 @@ export default function AppRoot() {
             path={`${process.env.PUBLIC_URL}/shop`}
             component={Market}
           />
-          <Route path={`${process.env.PUBLIC_URL}/blog`} component={Blog} />
+          <Route
+            exact
+            path={`${process.env.PUBLIC_URL}/blog`}
+            component={Blog}
+          />
+          <Route
+            path={`${process.env.PUBLIC_URL}/blog/post/:id`}
+            component={Post}
+          />
           <Route path={`${process.env.PUBLIC_URL}/about`} component={About} />
           <Route
             path={`${process.env.PUBLIC_URL}/contact`}

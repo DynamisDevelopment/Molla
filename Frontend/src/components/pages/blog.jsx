@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet'
 import Layout from '../app'
 import PageHeader from '../common/page-header'
 import Breadcrumb from '../common/breadcrumb'
-import PostSeven from '../features/post/post-seven'
+import PostSeven from '../post'
 import Pagination from '../features/pagination'
 
 import { isotopeLoad } from '../../utils'
