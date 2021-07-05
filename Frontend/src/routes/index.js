@@ -6,7 +6,6 @@ import LoadingOverlay from '../components/features/loading-overlay'
 import { scrollTop } from '../utils'
 const HomePage = React.lazy(() => import('../components/home/index'))
 const Market = React.lazy(() => import('../components/pages/market'))
-const ProductPages = React.lazy(() => import('./products-route.js'))
 const Blog = React.lazy(() => import('../components/pages/blog'))
 const About = React.lazy(() => import('../components/pages/about'))
 const Contact = React.lazy(() => import('../components/pages/contact'))
@@ -19,6 +18,7 @@ const ProductList = React.lazy(() => import('../components/pages/productList'))
 const Login = React.lazy(() => import('../components/pages/others/login'))
 const noMatch = React.lazy(() => import('../components/pages/404'))
 const Post = React.lazy(() => import('../components/postPage'))
+const Product = React.lazy(() => import('../components/pages/product'))
 
 export default function AppRoot() {
   useEffect(() => scrollTop(), [])
@@ -27,10 +27,6 @@ export default function AppRoot() {
     <Suspense fallback={<LoadingOverlay />}>
       <BrowserRouter>
         <Switch>
-          <Route
-            path={`${process.env.PUBLIC_URL}/product`}
-            component={ProductPages}
-          />
           <Route
             exact
             path={`${process.env.PUBLIC_URL}/`}
@@ -89,6 +85,11 @@ export default function AppRoot() {
             exact
             path={`${process.env.PUBLIC_URL}/login`}
             component={Login}
+          />
+          <Route
+            exact
+            path={`${process.env.PUBLIC_URL}/product/:id`}
+            component={Product}
           />
 
           <Route exact path="*" component={noMatch} />
