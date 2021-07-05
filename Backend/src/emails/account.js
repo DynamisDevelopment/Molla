@@ -1,10 +1,10 @@
-const init = require("./init")
+const email = require('./init')
 
 const sendWelcomeEmail = (email, name) => {
-  init().send({
+  email.init().send({
     to: email,
-    from: "cicerosrepublic72@gmail.com",
-    subject: "Thanks for signing up!",
+    from: 'cicerosrepublic72@gmail.com',
+    subject: 'Thanks for signing up!',
     text: `Welcome to the app, ${name}`,
   })
 }

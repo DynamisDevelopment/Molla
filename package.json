@@ -5,6 +5,9 @@
   "homepage": "",
   "basename": "/",
   "scripts": {
-    "test": "cd ./Backend && yarn test:prod"
+    "test": "cd ./Backend && yarn test:prod",
+    "start:fe": "cd ./Frontend && yarn start",
+    "start:be": "cd ./Backend && yarn test",
+    "start": "concurrently \"yarn start:fe\" \"yarn start:be\""
   }
 }
