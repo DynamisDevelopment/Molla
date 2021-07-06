@@ -1,5 +1,5 @@
 const express = require('express')
-const User = require('../models/user')
+const User = require('../schemas/user')
 const auth = require('../middleware/auth')
 const { sendWelcomeEmail } = require('../emails/account')
 

@@ -620,6 +620,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-15.12.5.tgz#9a78318a45d75c9523d2396131bd3cca54b2d185"
   integrity sha512-se3yX7UHv5Bscf8f1ERKvQOD6sTyycH3hdaoozvaLxgUiY5lIGEeH37AD0G0Qi9kPqihPn0HOfd2yaIEN9VwEg==
 
+"@types/node@14.x || 15.x":
+  version "15.14.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-15.14.1.tgz#4f9d3689532499fdda1c898e19f4593718655e36"
+  integrity sha512-wF6hazbsnwaW3GhK4jFuw5NaLDQVRQ6pWQUGAUrJzxixFkTaODSiAKMPXuHwPEPkAKQWHAzj6uJ5h+3zU9gQxg==
+
 "@types/prettier@^2.1.5":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.3.0.tgz#2e8332cc7363f887d32ec5496b207d26ba8052bb"
@@ -2675,6 +2680,25 @@ mongoose@^5.13.0:
     sift "13.5.2"
     sliced "1.0.1"
 
+mongoose@^5.13.2:
+  version "5.13.2"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.13.2.tgz#1b9095fc6bbbb015ea3bc2a79d6f56025406c769"
+  integrity sha512-sBUKJGpdwZCq9102Lj6ZOaLcW4z/T4TI9aGWrNX5ZlICwChKWG4Wo5qriLImdww3H7bETPW9vYtSiADNlA4wSQ==
+  dependencies:
+    "@types/mongodb" "^3.5.27"
+    "@types/node" "14.x || 15.x"
+    bson "^1.1.4"
+    kareem "2.3.2"
+    mongodb "3.6.8"
+    mongoose-legacy-pluralize "1.0.2"
+    mpath "0.8.3"
+    mquery "3.2.5"
+    ms "2.1.2"
+    regexp-clone "1.0.0"
+    safe-buffer "5.2.1"
+    sift "13.5.2"
+    sliced "1.0.1"
+
 mpath@0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/mpath/-/mpath-0.8.3.tgz#828ac0d187f7f42674839d74921970979abbdd8f"
@@ -2710,6 +2734,16 @@ ms@^2.1.1:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
+
+mtschemas@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/mtschemas/-/mtschemas-1.0.0.tgz#02e030521ba366d6710dafaa89bd5d9a6aff6fe4"
+  integrity sha512-btPp1ShFpvkk95WEoODQVgtgzUclMx3tnS3LpwC2sG2hwMAqGpmHYplyYhulQg5rSYtH6TmJ2bAtOOUCLShDqQ==
+  dependencies:
+    bcryptjs "^2.4.3"
+    jsonwebtoken "^8.5.1"
+    mongoose "^5.13.2"
+    validator "^13.6.0"
 
 natural-compare@^1.4.0:
   version "1.4.0"
