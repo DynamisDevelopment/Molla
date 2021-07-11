@@ -1,3 +1,4 @@
+// const { mongoose } = require('mt-routes-schemas')
 const app = require('./app')
 
 const port = process.env.PORT || 4000
