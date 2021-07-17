@@ -50,7 +50,7 @@ function ProductDetailSix(props) {
           to="#product-review-link"
           id="review-link"
         >
-          ( {product.reviews} Reviews )
+          ( {product.reviews.length} Reviews )
         </Link>
       </div>
 
@@ -221,7 +221,7 @@ function ProductDetailSix(props) {
       </div>
 
       <div className="product-details-footer">
-        {/* <div className="product-cat">
+        <div className="product-cat">
           <span>categories: </span>
           {product.categories.map((cat, index) => (
             <span key={index} className="mr-0">
@@ -229,7 +229,7 @@ function ProductDetailSix(props) {
               {index < product.categories.length - 1 ? ', ' : ''}
             </span>
           ))}
-        </div> */}
+        </div>
 
         <div className="social-icons social-icons-sm">
           <span className="social-label">Share:</span>
@@ -260,54 +260,11 @@ function ProductDetailSix(props) {
 
       <Accordion adClass="accordion-plus product-details-accordion">
         <Card title="Description" adClass="card-box card-sm">
-          <div className="product-desc-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-              odio. Quisque volutpat mattis eros. Nullam malesuada erat ut
-              turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
-              pede. Donec nec justo eget felis facilisis fermentum. Aliquam
-              porttitor mauris sit amet orci.
-            </p>
-            <ul>
-              <li>
-                Nunc nec porttitor turpis. In eu risus enim. In vitae mollis
-                elit.{' '}
-              </li>
-              <li>Vivamus finibus vel mauris ut vehicula.</li>
-              <li>
-                Nullam a magna porttitor, dictum risus nec, faucibus sapien.
-              </li>
-            </ul>
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-              odio. Quisque volutpat mattis eros. Nullam malesuada erat ut
-              turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
-              pede.
-            </p>
-          </div>
+          <div className="product-desc-content">{product.description}</div>
         </Card>
         <Card title="Additional information" adClass="card-box card-sm">
           <div className="product-desc-content">
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-              odio. Quisque volutpat mattis eros. Nullam malesuada erat ut
-              turpis. Suspendisse urna viverra non, semper suscipit, posuere a,
-              pede. Donec nec justo eget felis facilisis fermentum. Aliquam
-              porttitor mauris sit amet orci.
-            </p>
-
-            <h3>Fabric & care</h3>
-            <ul>
-              <li>100% Polyester</li>
-              <li>Do not iron</li>
-              <li>Do not wash</li>
-              <li>Do not bleach</li>
-              <li>Do not tumble dry</li>
-              <li>Professional dry clean only</li>
-            </ul>
-
-            <h3>Size</h3>
-            <p>S, M, L, XL</p>
+            {product.additionalInformation}
           </div>
         </Card>
         <Card
@@ -315,114 +272,56 @@ function ProductDetailSix(props) {
           expanded={true}
           adClass="card-box card-sm"
         >
-          <div className="product-desc-content">
-            <p>
-              We deliver to over 100 countries around the world. For full
-              details of the delivery options we offer, please view our{' '}
-              <Link to="#">Delivery information</Link>
-              <br />
-              We hope you’ll love every purchase, but if you ever need to return
-              an item you can do so within a month of receipt. For full details
-              of how to make a return, please view our{' '}
-              <Link to="#">Returns information</Link>
-            </p>
-          </div>
+          <div className="product-desc-content">{product.shippingReturns}</div>
         </Card>
-        <Card title={`Reviews (${product.reviews})`} adClass="card-box card-sm">
-          <div className="reviews">
-            <div className="review">
-              <div
-                className="row no-gutters"
-                style={isIEBrowser() ? { flexDirection: 'row' } : {}}
-              >
-                <div className="col-auto">
-                  <h4>
-                    <Link to="#">Samanta J.</Link>
-                  </h4>
-                  <div className="ratings-container">
-                    <div className="ratings">
-                      <div
-                        className="ratings-val"
-                        style={{ width: '80%' }}
-                      ></div>
-                    </div>
-                  </div>
-                  <span className="review-date">6 days ago</span>
-                </div>
-                <div className="col">
-                  <h4>Good, perfect size</h4>
-
-                  <div className="review-content">
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Ducimus cum dolores assumenda asperiores facilis porro
-                      reprehenderit animi culpa atque blanditiis commodi
-                      perspiciatis doloremque, possimus, explicabo, autem fugit
-                      beatae quae voluptas!
-                    </p>
-                  </div>
-
-                  <div className="review-action">
-                    <Link to="#">
-                      <i className="icon-thumbs-up"></i>Helpful (2)
-                    </Link>
-                    <Link to="#">
-                      <i className="icon-thumbs-down"></i>Unhelpful (0)
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="review">
-              <div
-                className="row no-gutters"
-                style={isIEBrowser() ? { flexDirection: 'row' } : {}}
-              >
-                <div className="col-auto">
-                  <h4>
-                    <Link to="#">John Doe</Link>
-                  </h4>
-                  <div className="ratings-container">
-                    <div className="ratings">
-                      <div
-                        className="ratings-val"
-                        style={{ width: '100%' }}
-                      ></div>
-                    </div>
-                  </div>
-                  <span className="review-date">5 days ago</span>
-                </div>
-                <div className="col">
-                  <h4>Very good</h4>
-
-                  <div className="review-content">
-                    <p>
-                      Sed, molestias, tempore? Ex dolor esse iure hic veniam
-                      laborum blanditiis laudantium iste amet. Cum non voluptate
-                      eos enim, ab cumque nam, modi, quas iure illum
-                      repellendus, blanditiis perspiciatis beatae!
-                    </p>
-                  </div>
-
-                  <div className="review-action">
-                    <Link to="#">
-                      <i className="icon-thumbs-up"></i>Helpful (0)
-                    </Link>
-                    <Link to="#">
-                      <i className="icon-thumbs-down"></i>Unhelpful (0)
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <Card
+          title={`Reviews (${product.reviews.length})`}
+          adClass="card-box card-sm"
+        >
+          <Reviews reviews={product.reviews} />
         </Card>
       </Accordion>
     </div>
   )
 }
 
+const Reviews = ({ reviews }) => {
+  return (
+    <div className="reviews">
+      {reviews.map((review, i) => (
+        <div className="review">
+          <div
+            className="row no-gutters"
+            style={isIEBrowser() ? { flexDirection: 'row' } : {}}
+          >
+            <div className="col-auto">
+              <h4>John Doe</h4>
+              <div className="ratings-container">
+                <div className="ratings">
+                  <div className="ratings-val" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+              <span className="review-date">5 days ago</span>
+            </div>
+            <div className="col">
+              <h4>{review.title}</h4>
+
+              <div className="review-content">
+                <p>{review.body}</p>
+              </div>
+
+              <div className="review-action">
+                <i className="icon-thumbs-up"></i>Helpful ({review.helpful})
+                <i className="icon-thumbs-down"></i>Unhelpful (
+                {review.unhelpful})
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
 function mapStateToProps(state, props) {
   return {
     isWishlist:

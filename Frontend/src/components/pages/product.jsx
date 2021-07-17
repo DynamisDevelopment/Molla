@@ -23,24 +23,23 @@ function SingleProduct(props) {
     setProduct(currentProduct.data)
   }, [productId])
 
+  console.log(product)
   useEffect(() => {
-    productGallery()
+    // productGallery()
 
-    // remove loaded-class on productId change
     let skelItems = document.querySelectorAll('.skel-pro-single')
 
-    for (let i = 0; i < skelItems.length; i++) {
-      skelItems[i].classList.remove('loaded')
-    }
+    for (let i = 0; i < skelItems.length; i++)
+      skelItems[i].classList.add('loaded')
 
-    let imgLoad = imagesLoaded('.product-gallery', { background: true })
-
-    imgLoad.on('done', function(instance, image) {
-      for (let i = 0; i < skelItems.length; i++) {
-        skelItems[i].classList.add('loaded')
-      }
-    })
-  }, [productId])
+    // remove loaded-class on productId change
+    // let imgLoad = imagesLoaded('.product-gallery', { background: true })
+    // imgLoad.on('done', function(instance, image) {
+    //   for (let i = 0; i < skelItems.length; i++) {
+    //     skelItems[i].classList.add('loaded')
+    //   }
+    // })
+  }, [product])
 
   return (
     <Layout>
