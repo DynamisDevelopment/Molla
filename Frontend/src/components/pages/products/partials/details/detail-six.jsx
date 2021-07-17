@@ -311,25 +311,34 @@ function ProductDetailSix(props) {
 const Reviews = ({ reviews }) => {
   const [helpful, setHelpful] = useState({})
   const [unhelpful, setUnhelpful] = useState({})
+  const [type, setType] = useState({})
 
-  const sendHelpful = (e, id, count) => {
+  const saveHelpful = (e, id) => {
     e.preventDefault()
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/review/${id}/helpful`)
-      .then(() => {
-        setHelpful(prev => ({ ...prev, [id]: helpful[id] + 1 }))
-      })
-      .catch(err => console.log(err))
+    if (type[id] === 'UNHELPFUL')
+      setUnhelpful(prev => ({
+        ...prev,
+        [id]: unhelpful[id] - 1,
+      }))
+
+    if (type[id] !== 'HELPFUL') {
+      setHelpful(prev => ({ ...prev, [id]: helpful[id] + 1 }))
+      setType(prev => ({ ...prev, [id]: 'HELPFUL' }))
+    }
   }
 
-  const sendUnhelpful = (e, id) => {
+  const saveUnhelpful = (e, id) => {
     e.preventDefault()
-    axios
-      .post(`${process.env.REACT_APP_API_URL}/review/${id}/unhelpful`)
-      .then(() => {
-        setUnhelpful(prev => ({ ...prev, [id]: unhelpful[id] + 1 }))
-      })
-      .catch(err => console.log(err))
+    if (type[id] === 'HELPFUL')
+      setHelpful(prev => ({
+        ...prev,
+        [id]: helpful[id] - 1,
+      }))
+
+    if (type[id] !== 'UNHELPFUL') {
+      setUnhelpful(prev => ({ ...prev, [id]: unhelpful[id] + 1 }))
+      setType(prev => ({ ...prev, [id]: 'UNHELPFUL' }))
+    }
   }
 
   useEffect(() => {
@@ -343,6 +352,22 @@ const Reviews = ({ reviews }) => {
         [review._id]: review.unhelpful,
       }))
     })
+
+    return () =>
+      reviews.forEach(review => {
+        if (type[review.id] === 'HELPFUL')
+          axios
+            .post(
+              `${process.env.REACT_APP_API_URL}/review/${review.id}/helpful`
+            )
+            .catch(err => console.log(err))
+        else if (type[review.id] === 'UNHELPFUL')
+          axios
+            .post(
+              `${process.env.REACT_APP_API_URL}/review/${review.id}/unhelpful`
+            )
+            .catch(err => console.log(err))
+      })
   }, [])
 
   return (
@@ -370,14 +395,11 @@ const Reviews = ({ reviews }) => {
               </div>
 
               <div className="review-action">
-                <Link
-                  to="#"
-                  onClick={e => sendHelpful(e, review._id, review.helpful)}
-                >
+                <Link to="#" onClick={e => saveHelpful(e, review._id)}>
                   <i className="icon-thumbs-up"></i>
                   Helpful ({helpful[review._id]})
                 </Link>
-                <Link to="#" onClick={e => sendUnhelpful(e, review._id)}>
+                <Link to="#" onClick={e => saveUnhelpful(e, review._id)}>
                   <i className="icon-thumbs-down"></i>
                   Unhelpful ({unhelpful[review._id]})
                 </Link>

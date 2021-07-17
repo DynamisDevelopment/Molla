@@ -16,14 +16,15 @@ function SingleProduct(props) {
   const [product, setProduct] = useState()
   let productId = props.match.params.id
 
-  useEffect(async () => {
-    const currentProduct = await axios.get(
-      `http://localhost:4000/product/${productId}`
-    )
-    setProduct(currentProduct.data)
-  }, [productId])
+  const getProduct = () =>
+    axios
+      .get(`http://localhost:4000/product/${productId}`)
+      .then(res => setProduct(res.data))
 
-  console.log(product)
+  useEffect(() => {
+    getProduct()
+  }, [])
+
   useEffect(() => {
     // productGallery()
 
