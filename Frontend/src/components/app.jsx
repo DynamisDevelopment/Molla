@@ -75,15 +75,15 @@ function App(props) {
     }, 200)
 
     // show 404 page
-    while (
-      matchedCount < props.children.length &&
-      !matchPath(window.location.pathname, {
-        path: props.children[matchedCount].props.path,
-        exact: true,
-      })
-    ) {
-      matchedCount++
-    }
+    // while (
+    //   matchedCount < props.children.length &&
+    //   !matchPath(window.location.pathname, {
+    //     path: props.children[matchedCount].props.path,
+    //     exact: true,
+    //   })
+    // ) {
+    //   matchedCount++
+    // }
 
     if (
       props.children &&
