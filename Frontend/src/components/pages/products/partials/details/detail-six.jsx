@@ -16,6 +16,7 @@ import {
 
 function ProductDetailSix(props) {
   const { product, isWishlist, type, addToCart, toggleWishlist } = props
+  const social = product.social
 
   useEffect(() => {
     quantityInputs()
@@ -233,28 +234,49 @@ function ProductDetailSix(props) {
 
         <div className="social-icons social-icons-sm">
           <span className="social-label">Share:</span>
-          <Link to="#" className="social-icon" title="Facebook" target="_blank">
-            <i className="icon-facebook-f"></i>
-          </Link>
-          <Link to="#" className="social-icon" title="Twitter" target="_blank">
-            <i className="icon-twitter"></i>
-          </Link>
-          <Link
-            to="#"
-            className="social-icon"
-            title="Instagram"
-            target="_blank"
-          >
-            <i className="icon-instagram"></i>
-          </Link>
-          <Link
-            to="#"
-            className="social-icon"
-            title="Pinterest"
-            target="_blank"
-          >
-            <i className="icon-pinterest"></i>
-          </Link>
+          {social.facebook && (
+            <a
+              href={social.facebook}
+              className="social-icon"
+              title="Facebook"
+              target="_blank"
+            >
+              <i className="icon-facebook-f"></i>
+            </a>
+          )}
+
+          {social.twitter && (
+            <a
+              href={social.twitter}
+              className="social-icon"
+              title="Twitter"
+              target="_blank"
+            >
+              <i className="icon-twitter"></i>
+            </a>
+          )}
+
+          {social.instagram && (
+            <a
+              href={social.instagram}
+              className="social-icon"
+              title="Instagram"
+              target="_blank"
+            >
+              <i className="icon-instagram"></i>
+            </a>
+          )}
+
+          {social.pintrest && (
+            <a
+              href={social.pintrest}
+              className="social-icon"
+              title="Pinterest"
+              target="_blank"
+            >
+              <i className="icon-pinterest"></i>
+            </a>
+          )}
         </div>
       </div>
 
