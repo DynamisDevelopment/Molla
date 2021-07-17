@@ -15,6 +15,7 @@ import { isotopeLoad } from '../../utils'
 
 export default function Grid4Cols() {
   const [posts, setPosts] = useState([])
+  const [categories, setCategories] = useState([])
 
   useEffect(() => {
     isotopeLoad(
@@ -31,8 +32,14 @@ export default function Grid4Cols() {
       .get(`${process.env.REACT_APP_API_URL}/post`)
       .then(res => setPosts(res.data))
 
+  const getCategories = () =>
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/posts/categories`)
+      .then(res => setCategories(res.data))
+
   useEffect(() => {
     getPosts()
+    getCategories()
   }, [])
 
   return (
@@ -50,40 +57,7 @@ export default function Grid4Cols() {
         {posts && (
           <div className="page-content">
             <div className="container">
-              <nav className="blog-nav">
-                <ul className="menu-cat entry-filter justify-content-center">
-                  <li className="active">
-                    <a href="#1" data-filter="*">
-                      All Blog Posts<span>8</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#2" data-filter=".lifestyle">
-                      Lifestyle<span>3</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#3" data-filter=".shopping">
-                      Shopping<span>1</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#4" data-filter=".fashion">
-                      Fashion<span>2</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#5" data-filter=".travel">
-                      Travel<span>3</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#6" data-filter=".hobbies">
-                      Hobbies<span>2</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+              <Categories categories={categories} />
 
               <Posts posts={posts} />
 
@@ -96,11 +70,38 @@ export default function Grid4Cols() {
   )
 }
 
+const Categories = ({ categories }) => {
+  return (
+    <nav className="blog-nav">
+      <ul className="menu-cat entry-filter justify-content-center">
+        <li className="active">
+          <a href="#1" data-filter="*">
+            All Blog Posts<span>8</span>
+          </a>
+        </li>
+        {categories.map((category, i) => (
+          <li key={i}>
+            <a href={`#${i + 1}`} data-filter={`.${category}`}>
+              {category}
+              <span>3</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
 const Posts = ({ posts }) => {
   return (
     <div className="entry-container max-col-4" data-layout="fitRows">
       {posts.map((post, i) => (
-        <div className="entry-item col-sm-6 col-md-4 col-lg-3" key={i}>
+        <div
+          className={`entry-item col-sm-6 col-md-4 col-lg-3 ${post.categories.join(
+            ' '
+          )}`}
+          key={i}
+        >
           <PostSeven post={post} isIsotope={true} />
         </div>
       ))}
