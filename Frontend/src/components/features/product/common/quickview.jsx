@@ -185,7 +185,8 @@ function QuickView(props) {
                   ></div>
                 </div>
                 <span className="ratings-text">
-                  ({productDetail.reviews} Reviews )
+                  ({productDetail.reviews.length}{' '}
+                  {productDetail.reviews.length > 1 ? 'Reviews' : 'Review'} )
                 </span>
               </div>
 

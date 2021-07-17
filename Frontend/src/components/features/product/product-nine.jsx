@@ -180,7 +180,10 @@ function ProductNine(props) {
               style={{ width: product.ratings * 20 + '%' }}
             ></div>
           </div>
-          <span className="ratings-text">({product.reviews} Reviews )</span>
+          <span className="ratings-text">
+            ({product.reviews.length}{' '}
+            {product.reviews.length > 1 ? 'Reviews' : 'Review'})
+          </span>
         </div>
 
         {product.variants ? (
