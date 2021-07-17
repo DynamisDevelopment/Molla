@@ -5,7 +5,10 @@ const API_URL = process.env.PUBLIC_URL
 // API to get products from mock server
 export const getProducts = function() {
   return axios
-    .get('http://localhost:4000/product')
-    .then(res => res.data)
+    .get(`${process.env.REACT_APP_API_URL}/product`)
+    .then(res => {
+      console.log(res.data, '===============')
+      return res.data
+    })
     .catch(err => err)
 }

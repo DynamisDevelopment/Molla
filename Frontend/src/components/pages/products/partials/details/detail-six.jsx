@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import Accordion from '../../../../features/accordion/accordion'
 import Card from '../../../../features/accordion/card'
@@ -308,6 +309,42 @@ function ProductDetailSix(props) {
 }
 
 const Reviews = ({ reviews }) => {
+  const [helpful, setHelpful] = useState({})
+  const [unhelpful, setUnhelpful] = useState({})
+
+  const sendHelpful = (e, id, count) => {
+    e.preventDefault()
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/review/${id}/helpful`)
+      .then(() => {
+        setHelpful(prev => ({ ...prev, [id]: helpful[id] + 1 }))
+      })
+      .catch(err => console.log(err))
+  }
+
+  const sendUnhelpful = (e, id) => {
+    e.preventDefault()
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/review/${id}/unhelpful`)
+      .then(() => {
+        setUnhelpful(prev => ({ ...prev, [id]: unhelpful[id] + 1 }))
+      })
+      .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    reviews.forEach(review => {
+      setHelpful(prev => ({
+        ...prev,
+        [review._id]: review.helpful,
+      }))
+      setUnhelpful(prev => ({
+        ...prev,
+        [review._id]: review.unhelpful,
+      }))
+    })
+  }, [])
+
   return (
     <div className="reviews">
       {reviews.map((review, i) => (
@@ -333,9 +370,17 @@ const Reviews = ({ reviews }) => {
               </div>
 
               <div className="review-action">
-                <i className="icon-thumbs-up"></i>Helpful ({review.helpful})
-                <i className="icon-thumbs-down"></i>Unhelpful (
-                {review.unhelpful})
+                <Link
+                  to="#"
+                  onClick={e => sendHelpful(e, review._id, review.helpful)}
+                >
+                  <i className="icon-thumbs-up"></i>
+                  Helpful ({helpful[review._id]})
+                </Link>
+                <Link to="#" onClick={e => sendUnhelpful(e, review._id)}>
+                  <i className="icon-thumbs-down"></i>
+                  Unhelpful ({unhelpful[review._id]})
+                </Link>
               </div>
             </div>
           </div>
