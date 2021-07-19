@@ -68,14 +68,14 @@ function ProductNine(props) {
         <Link to={`${process.env.PUBLIC_URL}/product/${product._id}`}>
           <LazyLoadImage
             alt="product"
-            src={`${process.env.PUBLIC_URL}/${product.pictures[0]}`}
+            src={`${process.env.REACT_APP_API_URL}/${product.pictures[0]}`}
             threshold={100}
           />
 
           {product.pictures[1] ? (
             <LazyLoadImage
               alt="product"
-              src={`${process.env.PUBLIC_URL}/${product.pictures[1]}`}
+              src={`${process.env.REACT_APP_API_URL}/${product.pictures[1]}`}
               threshold={100}
               wrapperClassName="product-image-hover product-image"
             />

@@ -28,7 +28,6 @@ function Sidebar(props) {
   } = props
   let products = props.products
 
-  console.log(products, '_____________')
   return (
     <aside className="col-xl-3 col-xxl-2 order-xl-first">
       <div className="sidebar sidebar-home">

@@ -18,7 +18,7 @@ function SingleProduct(props) {
 
   const getProduct = () =>
     axios
-      .get(`http://localhost:4000/product/${productId}`)
+      .get(`${process.env.REACT_APP_API_URL}/product/${productId}`)
       .then(res => setProduct(res.data))
 
   useEffect(() => {
@@ -26,20 +26,24 @@ function SingleProduct(props) {
   }, [])
 
   useEffect(() => {
-    // productGallery()
-
-    let skelItems = document.querySelectorAll('.skel-pro-single')
-
-    for (let i = 0; i < skelItems.length; i++)
-      skelItems[i].classList.add('loaded')
+    productGallery()
 
     // remove loaded-class on productId change
-    // let imgLoad = imagesLoaded('.product-gallery', { background: true })
-    // imgLoad.on('done', function(instance, image) {
-    //   for (let i = 0; i < skelItems.length; i++) {
-    //     skelItems[i].classList.add('loaded')
-    //   }
-    // })
+    let skelItems = document.querySelectorAll('.skel-pro-single')
+
+    for (let i = 0; i < skelItems.length; i++) {
+      skelItems[i].classList.remove('loaded')
+    }
+
+    let imgLoad = imagesLoaded('.product-gallery', {
+      background: true,
+    })
+
+    imgLoad.on('done', function(instance, image) {
+      for (let i = 0; i < skelItems.length; i++) {
+        skelItems[i].classList.add('loaded')
+      }
+    })
   }, [product])
 
   return (
@@ -73,7 +77,7 @@ function SingleProduct(props) {
                       <div className="col-md-6 col-lg-7">
                         <div className="skel-product-gallery"></div>
 
-                        {/* <MediaOne product={product} adClass="" /> */}
+                        <MediaOne product={product} adClass="" />
                       </div>
 
                       <div className="col-md-6 col-lg-5">
