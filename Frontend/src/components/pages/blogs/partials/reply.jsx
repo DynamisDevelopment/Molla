@@ -2,22 +2,23 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 function Reply({ postId, setComments }) {
-  const [body, setBody] = useState()
-  const [name, setName] = useState()
+  const [body, setBody] = useState('')
+  const [name, setName] = useState('')
 
-  const sendComment = () => {
-    setComments(prev => [
-      ...prev,
-      {
-        _id: '60f3178c9702683e902a491b',
-        title: 'This post sucks',
-        name: name,
-        body,
-        createdAt: '2021-07-17T17:46:52.571Z',
-        updatedAt: '2021-07-17T17:46:52.571Z',
-        __v: 0,
-      },
-    ])
+  const sendComment = e => {
+    e.preventDefault()
+    const comment = {
+      name,
+      body,
+      image: `assets/images/blog/comments/1.jpg`,
+    }
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/post/${postId}/comment`, comment)
+      .then(res => setComments(prev => [...prev, { ...res.data }]))
+      .catch(err => console.log(err))
+
+    setBody('')
+    setName('')
   }
 
   return (
@@ -41,6 +42,8 @@ function Reply({ postId, setComments }) {
           className="form-control"
           required
           placeholder="Comment *"
+          onInput={e => setBody(e.target.value.trim())}
+          value={body}
         ></textarea>
 
         <div className="row">
@@ -55,6 +58,8 @@ function Reply({ postId, setComments }) {
               name="reply-name"
               required
               placeholder="Name *"
+              onInput={e => setName(e.target.value.trim())}
+              value={name}
             />
           </div>
         </div>

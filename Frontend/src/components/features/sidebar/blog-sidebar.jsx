@@ -45,7 +45,7 @@ function BlogSidebar({ post }) {
 
         <ul>
           {categories.slice(0, 10).map((category, i) => (
-            <li>
+            <li key={i}>
               <Link to={`${process.env.REACT_APP_PUBLIC_URL}/blog/${category}`}>
                 {category}
                 <span>3</span>

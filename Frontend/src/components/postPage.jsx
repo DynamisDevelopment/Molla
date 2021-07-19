@@ -60,17 +60,15 @@ function SingleFullWidthSidebar(props) {
     })
   }
 
-  console.log(postId, '--------------------------')
   const getPost = () =>
     axios
       .get(`${process.env.REACT_APP_API_URL}/post/${postId}`)
       .then(res => {
-        console.log(res)
         if (!res.data) window.location = process.env.PUBLIC_URL + '/pages/404'
         setPost(res.data)
         setComments(res.data.comments)
       })
-      .catch(err => console.log(err, '++++++++++++++'))
+      .catch(err => console.log(err))
 
   useEffect(() => {
     getPost()
