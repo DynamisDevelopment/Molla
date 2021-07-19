@@ -7,6 +7,5 @@ const test = 'mongodb://127.0.0.1:27017/mollaTinker'
 mongoose.connect(test, {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true,
   useFindAndModify: false,
 })

@@ -20,15 +20,15 @@ function Breadcrumb(props) {
     if ('function' !== typeof parent[x]) path.push(parent[x])
   }
 
-  currentProducts = products.filter(item => item.id === parseInt(productId))
+  currentProducts = products.filter(item => item._id === productId)
 
   // get product for prev button.
-  prevProducts = products.filter(item => item.id < parseInt(productId))
+  prevProducts = products.filter(item => item._id < productId)
   if (!prevProducts || !prevProducts.length) prevProduct = currentProducts[0]
   else prevProduct = prevProducts[prevProducts.length - 1]
 
   // get product for next button.
-  nextProducts = products.filter(item => item.id > parseInt(productId))
+  nextProducts = products.filter(item => item._id > productId)
   if (!nextProducts || nextProducts.length === 0)
     nextProduct = currentProducts[0]
   else nextProduct = nextProducts[0]
@@ -71,10 +71,10 @@ function Breadcrumb(props) {
             </li>
           </ol>
 
-          <nav className="product-pager ml-auto" aria-label="Product">
+          {/* <nav className="product-pager ml-auto" aria-label="Product">
             <Link
               className="product-pager-link product-pager-prev"
-              to={`${process.env.PUBLIC_URL}/${type}/${slug}/${prevProduct.id}`}
+              to={`${process.env.PUBLIC_URL}/${type}/${slug}/${prevProduct._id}`}
               aria-label="Previous"
               tabIndex="-1"
             >
@@ -99,7 +99,7 @@ function Breadcrumb(props) {
 
             <Link
               className="product-pager-link product-pager-next"
-              to={`${process.env.PUBLIC_URL}/${type}/${slug}/${nextProduct.id}`}
+              to={`${process.env.PUBLIC_URL}/${type}/${slug}/${nextProduct._id}`}
               aria-label="Next"
               tabIndex="-1"
             >
@@ -123,7 +123,7 @@ function Breadcrumb(props) {
                 ''
               )}
             </Link>
-          </nav>
+          </nav> */}
         </div>
       ) : (
         ''

@@ -65,7 +65,7 @@ function ProductNine(props) {
           ''
         )}
 
-        <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>
+        <Link to={`${process.env.PUBLIC_URL}/product/${product._id}`}>
           <LazyLoadImage
             alt="product"
             src={`${process.env.PUBLIC_URL}/${product.pictures[0]}`}
@@ -126,12 +126,12 @@ function ProductNine(props) {
       <div className="product-body">
         <div className="product-cat">
           <span className="mr-0">
-            <Link to="#">{product.category[0]}</Link>
+            <Link to="#">{product.categories[0]}</Link>
           </span>
         </div>
 
         <h3 className="product-title">
-          <Link to={`${process.env.PUBLIC_URL}/product/27`}>
+          <Link to={`${process.env.PUBLIC_URL}/product/${product._id}`}>
             {product.name}
           </Link>
         </h3>
@@ -180,7 +180,10 @@ function ProductNine(props) {
               style={{ width: product.ratings * 20 + '%' }}
             ></div>
           </div>
-          <span className="ratings-text">({product.reviews} Reviews )</span>
+          <span className="ratings-text">
+            ({product.reviews.length}{' '}
+            {product.reviews.length > 1 ? 'Reviews' : 'Review'})
+          </span>
         </div>
 
         {product.variants ? (
