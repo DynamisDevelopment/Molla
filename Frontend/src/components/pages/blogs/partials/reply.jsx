@@ -8,8 +8,8 @@ function Reply({ postId, setComments }) {
   const sendComment = e => {
     e.preventDefault()
     const comment = {
-      name,
-      body,
+      name: name.trim(),
+      body: body.trim(),
       image: `assets/images/blog/comments/1.jpg`,
     }
     axios
@@ -42,7 +42,7 @@ function Reply({ postId, setComments }) {
           className="form-control"
           required
           placeholder="Comment *"
-          onInput={e => setBody(e.target.value.trim())}
+          onInput={e => setBody(e.target.value)}
           value={body}
         ></textarea>
 
@@ -58,7 +58,7 @@ function Reply({ postId, setComments }) {
               name="reply-name"
               required
               placeholder="Name *"
-              onInput={e => setName(e.target.value.trim())}
+              onInput={e => setName(e.target.value)}
               value={name}
             />
           </div>

@@ -100,10 +100,10 @@ function QuickView(props) {
   let ratings = productDetail.ratings * 20
   let images = productDetail.lgPictures
     ? productDetail.lgPictures
-    : productDetail.pictures
+    : productDetail.assets
   let smallPictures = productDetail.smPictures
     ? productDetail.smPictures
-    : productDetail.pictures
+    : productDetail.assets
 
   return (
     <Modal

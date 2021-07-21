@@ -15,8 +15,8 @@ function MediaOne(props) {
   const [photoIndex, setPhotoIndex] = useState(0)
   const [isOpen, setStatus] = useState(false)
 
-  const bigImages = product.lgPictures ? product.lgPictures : product.pictures
-  const smallImages = product.smPictures ? product.smPictures : product.pictures
+  const bigImages = product.lgPictures ? product.lgPictures : product.assets
+  const smallImages = product.smPictures ? product.smPictures : product.assets
 
   useEffect(() => {
     quantityInputs()
@@ -76,7 +76,7 @@ function MediaOne(props) {
               ''
             )}{' '}
             <Magnifier
-              imageSrc={`${process.env.REACT_APP_API_URL}/${product.pictures[0]}`}
+              imageSrc={`${process.env.REACT_APP_API_URL}/${product.assets[0]}`}
               imageAlt="Example"
               largeImageSrc={`${process.env.REACT_APP_API_URL}/${bigImages[0]}`} // Optional
               dragToMove={false}
@@ -94,7 +94,7 @@ function MediaOne(props) {
           </figure>
 
           <div id="product-zoom-gallery" className="product-image-gallery">
-            {product.pictures.map((item, index) => (
+            {product.assets.map((item, index) => (
               <button
                 className={`product-gallery-item ${
                   0 === index ? 'active' : ''

@@ -13,7 +13,7 @@ function SmallProduct(props) {
 
           <LazyLoadImage
             alt="product"
-            src={`${process.env.REACT_APP_API_URL}/${product.pictures[0]}`}
+            src={`${process.env.REACT_APP_API_URL}/${product.assets[0]}`}
             threshold={400}
           />
         </Link>

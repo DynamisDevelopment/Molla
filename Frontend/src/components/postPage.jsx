@@ -65,6 +65,8 @@ function SingleFullWidthSidebar(props) {
       .get(`${process.env.REACT_APP_API_URL}/post/${postId}`)
       .then(res => {
         if (!res.data) window.location = process.env.PUBLIC_URL + '/pages/404'
+        // res.data.assets = []
+        res.data.type = 'gallery'
         setPost(res.data)
         setComments(res.data.comments)
       })
@@ -94,17 +96,16 @@ function SingleFullWidthSidebar(props) {
               {post.type === 'gallery' ? (
                 <figure className="entry-media">
                   <OwlCarousels adClass="owl-simple owl-light owl-nav-inside">
-                    {post.image.map((item, index) => (
+                    {post.assets.map((item, index) => (
                       <div key={'blog' + index}>
                         <div className="lazy-overlay bg-3"></div>
-
-                        {/* <LazyLoadImage
-                          src={process.env.PUBLIC_URL + '/' + item}
+                        <LazyLoadImage
+                          src={`${process.env.REACT_APP_API_URL}/${item}`}
                           alt="blog"
                           width={100}
                           height={400}
                           effect="blur"
-                        /> */}
+                        />{' '}
                       </div>
                     ))}
                   </OwlCarousels>
@@ -113,27 +114,27 @@ function SingleFullWidthSidebar(props) {
                 <figure className="entry-media">
                   <div className="lazy-overlay bg-3"></div>
 
-                  {/* <LazyLoadImage
-                    src={process.env.PUBLIC_URL + '/' + post.image[0]}
+                  <LazyLoadImage
+                    src={`${process.env.REACT_APP_API_URL}/${post.assets[0]}`}
                     alt="blog"
                     width={100}
                     height={400}
                     effect="blur"
-                  /> */}
+                  />
                 </figure>
               ) : (
                 <figure className="entry-media entry-video">
                   <Link to="#" onClick={showVideoModal}>
                     <div className="lazy-overlay bg-3"></div>
 
-                    {/* <LazyLoadImage
+                    <LazyLoadImage
                       alt="post_image"
-                      src={`${process.env.PUBLIC_URL + '/' + post.image[0]}`}
+                      src={`${process.env.REACT_APP_API_URL}/${post.assets[0]}`}
                       threshold={100}
                       effect="blur"
                       width={300}
                       height={300}
-                    /> */}
+                    />
                   </Link>
                 </figure>
               )}
@@ -238,7 +239,7 @@ function SingleFullWidthSidebar(props) {
                           <img
                             src={`${process.env.PUBLIC_URL}/assets/images/blog/single/author.jpg`}
                             alt="User name"
-                          />
+                          />{' '}
                         </Link>
                       </figure>
 
