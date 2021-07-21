@@ -1,5 +1,5 @@
 const express = require('express')
-require('./mongoose')
+const { mongooseConnect } = require('mt-routes-schemas')
 
 const {
   productRouter,
@@ -9,9 +9,11 @@ const {
 } = require('mt-routes-schemas')
 const userRouter = require('./routers/users')
 const localReviewRouter = require('./routers/reviews')
+const localCommentRouter = require('./routers/comments')
+
+mongooseConnect('mollaTinker')
 
 const app = express()
-
 app.use(express.json())
 
 // * External
@@ -23,5 +25,6 @@ app.use(commentRouter)
 
 // * Local
 app.use(localReviewRouter)
+app.use(localCommentRouter)
 
 module.exports = app

@@ -21,7 +21,7 @@ function DashBoard() {
         <PageHeader title="My Account" subTitle="Shop" />
         <Breadcrumb
           title="My Account"
-          parent1={['Shop', 'shop/sidebar/list']}
+          parent1={['Shop', 'shop']}
           adClass="mb-3"
         />
 
@@ -109,7 +109,7 @@ function DashBoard() {
                         <TabPanel>
                           <p>No order has been made yet.</p>
                           <Link
-                            to={`${process.env.PUBLIC_URL}/shop/siebar/list`}
+                            to={`${process.env.PUBLIC_URL}/shop`}
                             className="btn btn-outline-primary-2"
                           >
                             <span>GO SHOP</span>

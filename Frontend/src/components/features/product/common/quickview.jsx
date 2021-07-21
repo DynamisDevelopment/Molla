@@ -100,10 +100,10 @@ function QuickView(props) {
   let ratings = productDetail.ratings * 20
   let images = productDetail.lgPictures
     ? productDetail.lgPictures
-    : productDetail.pictures
+    : productDetail.assets
   let smallPictures = productDetail.smPictures
     ? productDetail.smPictures
-    : productDetail.pictures
+    : productDetail.assets
 
   return (
     <Modal
@@ -133,7 +133,10 @@ function QuickView(props) {
                     className="intro-slide bg-transparent"
                     key={'gallery' + index}
                   >
-                    <img src={process.env.PUBLIC_URL + '/' + item} alt="Desc" />
+                    <img
+                      src={`${process.env.REACT_APP_API_URL}/${item}`}
+                      alt="Desc"
+                    />
                     <button
                       className="btn-fullscreen"
                       onClick={() => openLightBox(index)}
@@ -155,7 +158,10 @@ function QuickView(props) {
                   }`}
                   key={'product-dot-' + index}
                 >
-                  <img src={process.env.PUBLIC_URL + '/' + item} alt="dot" />
+                  <img
+                    src={`${process.env.REACT_APP_API_URL}/${item}`}
+                    alt="dot"
+                  />
                 </Link>
               ))}
             </div>
@@ -376,17 +382,13 @@ function QuickView(props) {
 
       {open && (
         <Lightbox
-          mainSrc={process.env.PUBLIC_URL + '/' + images[photoIndex]}
-          nextSrc={
-            process.env.PUBLIC_URL +
-            '/' +
+          mainSrc={`${process.env.REACT_APP_API_URL}/${images[photoIndex]}`}
+          nextSrc={`${process.env.REACT_APP_API_URL}/${
             images[(photoIndex + 1) % images.length]
-          }
-          prevSrc={
-            process.env.PUBLIC_URL +
-            '/' +
-            images[(photoIndex + images.length - 1) % images.length]
-          }
+          }`}
+          prevSrc={`${process.env.REACT_APP_API_URL}/${
+            images[(photoIndex - 1) % images.length]
+          }`}
           onCloseRequest={closeLightBoxHandler}
           onMovePrevRequest={setNextHandler}
           onMoveNextRequest={setPrevHandler}

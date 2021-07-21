@@ -9,7 +9,7 @@ import { findIndex } from '../utils'
  */
 export const getVisibleProducts = (
   products,
-  { sortBy, category, size, brand, color, rating, value }
+  { sortBy, categories, size, brand, color, rating, value }
 ) => {
   return products
     .filter(item => {
@@ -20,12 +20,12 @@ export const getVisibleProducts = (
         valResult = false,
         ratingResult = false
 
-      if (category && category.length > 0) {
-        for (let i = 0; i < category.length; i++) {
+      if (categories && categories.length > 0) {
+        for (let i = 0; i < categories.length; i++) {
           if (
-            -1 !== findIndex(item.category, cat => cat === category[i]) ||
-            (category[i] === 'Sale' && item.discount > 0) ||
-            category[i] === 'All'
+            -1 !== findIndex(item.categories, cat => cat === categories[i]) ||
+            (categories[i] === 'Sale' && item.discount > 0) ||
+            categories[i] === 'All'
           )
             catResult = true
         }
@@ -170,45 +170,46 @@ export const getTopSellingProducts = products => {
 }
 
 /**
- * Get products filtered by category
+ * Get products filtered by categories
  * @param {Array} products
- * @param {String} category
+ * @param {String} categories
  * @return {Array} filteredProducts
  */
-export const getProductsByCategory = (products, category) => {
-  if (category === 'All') return products
+export const getProductsByCategory = (products, categories) => {
+  if (categories === 'All') return products
 
-  if (-1 !== category.indexOf('&')) {
-    category = category.split(' & ')
+  if (-1 !== categories.indexOf('&')) {
+    categories = categories.split(' & ')
   }
 
   return products.filter(item => {
     let result = false
 
-    if (Array.isArray(category)) {
-      for (let i = 0; i < category.length; i++) {
-        if (-1 !== item.categories.indexOf(category[i])) {
+    if (Array.isArray(categories)) {
+      for (let i = 0; i < categories.length; i++) {
+        if (-1 !== item.categories.indexOf(categories[i])) {
           result = true
         }
       }
     } else {
-      if (-1 !== item.categories.indexOf(category)) result = true
+      if (-1 !== item.categories.indexOf(categories)) result = true
     }
     return result
   })
 }
 
 /**
- * Get number of products filtered by category
+ * Get number of products filtered by categories
  * @param {Array} products
- * @param {String} category
+ * @param {String} categories
  * @return {Integer} count of suitable products
  */
-export const getCountByCategory = (products, category) => {
-  if (category === 'All') return products.length
-  if (category === 'Sale')
+export const getCountByCategory = (products, categories) => {
+  if (categories === 'All') return products.length
+  if (categories === 'Sale')
     return products.filter(item => item.discount > 0).length
-  return products.filter(item => -1 !== item.category.indexOf(category)).length
+  return products.filter(item => -1 !== item.categories.indexOf(categories))
+    .length
 }
 
 /**
@@ -244,7 +245,7 @@ export const getCartCount = cartItems => {
 /**
  * Get number of products filtered by rating
  * @param {Array} products
- * @param {String} category
+ * @param {String} categories
  * @return {Integer} number of products filtered by rating
  */
 export const getCountByRating = (products, rating) => {

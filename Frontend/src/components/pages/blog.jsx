@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import isotope from 'isotope-layout'
 import imagesLoaded from 'imagesloaded'
 import { Helmet } from 'react-helmet'
+import axios from 'axios'
 
 // import Custom Components
 import Layout from '../app'
@@ -12,9 +13,10 @@ import Pagination from '../features/pagination'
 
 import { isotopeLoad } from '../../utils'
 
-import posts from '../../mock_data/posts'
-
 export default function Grid4Cols() {
+  const [posts, setPosts] = useState([])
+  const [categories, setCategories] = useState([])
+
   useEffect(() => {
     isotopeLoad(
       isotope,
@@ -24,6 +26,21 @@ export default function Grid4Cols() {
       '.entry-filter'
     )
   })
+
+  const getPosts = () =>
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/post`)
+      .then(res => setPosts(res.data))
+
+  const getCategories = () =>
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/posts/categories`)
+      .then(res => setCategories(res.data))
+
+  useEffect(() => {
+    getPosts()
+    getCategories()
+  }, [])
 
   return (
     <Layout>
@@ -37,81 +54,57 @@ export default function Grid4Cols() {
         <PageHeader title="Blog Grid 4 Columns" subTitle="Blog" />
         <Breadcrumb title="Blog" adClass="mb-2" />
 
-        <div className="page-content">
-          <div className="container">
-            <nav className="blog-nav">
-              <ul className="menu-cat entry-filter justify-content-center">
-                <li className="active">
-                  <a href="#1" data-filter="*">
-                    All Blog Posts<span>8</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#2" data-filter=".lifestyle">
-                    Lifestyle<span>3</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#3" data-filter=".shopping">
-                    Shopping<span>1</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#4" data-filter=".fashion">
-                    Fashion<span>2</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#5" data-filter=".travel">
-                    Travel<span>3</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#6" data-filter=".hobbies">
-                    Hobbies<span>2</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+        {posts && (
+          <div className="page-content">
+            <div className="container">
+              <Categories categories={categories} />
 
-            <div className="entry-container max-col-4" data-layout="fitRows">
-              <div className="entry-item lifestyle shopping col-sm-6 col-md-4 col-lg-3">
-                <PostSeven post={posts[37]} isIsotope={true} />
-              </div>
+              <Posts posts={posts} />
 
-              <div className="entry-item lifestyle col-sm-6 col-md-4 col-lg-3">
-                <PostSeven post={posts[38]} isIsotope={true} />
-              </div>
-
-              <div className="entry-item lifestyle fashion col-sm-6 col-md-4 col-lg-3">
-                <PostSeven post={posts[39]} isIsotope={true} />
-              </div>
-
-              <div className="entry-item travel col-sm-6 col-md-4 col-lg-3">
-                <PostSeven post={posts[40]} isIsotope={true} />
-              </div>
-
-              <div className="entry-item travel hobbies col-sm-6 col-md-4 col-lg-3">
-                <PostSeven post={posts[41]} isIsotope={true} />
-              </div>
-
-              <div className="entry-item hobbies col-sm-6 col-md-4 col-lg-3">
-                <PostSeven post={posts[42]} isIsotope={true} />
-              </div>
-
-              <div className="entry-item travel col-sm-6 col-md-4 col-lg-3">
-                <PostSeven post={posts[43]} isIsotope={true} />
-              </div>
-
-              <div className="entry-item fashion col-sm-6 col-md-4 col-lg-3">
-                <PostSeven post={posts[44]} isIsotope={true} />
-              </div>
+              <Pagination aclass="justify-content-center" count={8} unit={8} />
             </div>
-
-            <Pagination aclass="justify-content-center" count={8} unit={8} />
           </div>
-        </div>
+        )}
       </div>
     </Layout>
+  )
+}
+
+const Categories = ({ categories }) => {
+  return (
+    <nav className="blog-nav">
+      <ul className="menu-cat entry-filter justify-content-center">
+        <li className="active">
+          <a href="#1" data-filter="*">
+            All Blog Posts<span>8</span>
+          </a>
+        </li>
+        {categories.map((category, i) => (
+          <li key={i}>
+            <a href={`#${i + 1}`} data-filter={`.${category}`}>
+              {category}
+              <span>3</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+const Posts = ({ posts }) => {
+  return (
+    <div className="entry-container max-col-4" data-layout="fitRows">
+      {posts.map((post, i) => (
+        <div
+          className={`entry-item col-sm-6 col-md-4 col-lg-3 ${post.categories.join(
+            ' '
+          )}`}
+          key={i}
+        >
+          <PostSeven post={post} isIsotope={true} />
+        </div>
+      ))}
+    </div>
   )
 }

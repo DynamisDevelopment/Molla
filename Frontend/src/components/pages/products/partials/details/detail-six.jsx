@@ -223,15 +223,17 @@ function ProductDetailSix(props) {
       </div>
 
       <div className="product-details-footer">
-        <div className="product-cat">
-          <span>categories: </span>
-          {product.categories.map((cat, index) => (
-            <span key={index} className="mr-0">
-              <Link to="#">{cat}</Link>
-              {index < product.categories.length - 1 ? ', ' : ''}
-            </span>
-          ))}
-        </div>
+        {product.categories.length > 0 && (
+          <div className="product-cat">
+            <span>categories: </span>
+            {product.categories.map((cat, index) => (
+              <span key={index} className="mr-0">
+                <Link to="#">{cat}</Link>
+                {index < product.categories.length - 1 ? ', ' : ''}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div className="social-icons social-icons-sm">
           <span className="social-label">Share:</span>

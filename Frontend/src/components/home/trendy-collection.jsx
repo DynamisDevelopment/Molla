@@ -24,7 +24,7 @@ function TrendyCollection(props) {
 
   let products = props.products
   products = getFeaturedProducts(products.slice(0, 5))
-
+  console.log(props.products)
   return (
     <div className="bg-lighter trending-products">
       <Tabs selectedTabClassName="show" defaultIndex={0}>

@@ -8,7 +8,7 @@ function PostSeven(props) {
   const { post, isIsotope = false } = props
 
   if (post) {
-    let date = new Date(post.date)
+    let date = new Date(post.createdAt)
     let options = {
       year: 'numeric',
       month: 'short',
@@ -20,10 +20,10 @@ function PostSeven(props) {
       <article className="entry entry-grid text-center">
         {'video' === post.type ? (
           <figure className="entry-media entry-video">
-            <Link to={`${process.env.PUBLIC_URL}/blog/post/${post.id}`}>
+            <Link to={`${process.env.PUBLIC_URL}/blog/post/${post._id}`}>
               {isIsotope ? (
                 <img
-                  src={`${process.env.PUBLIC_URL + '/' + post.image[0]}`}
+                  src={`https://placeimg.com/300/300/any`}
                   alt="post_image"
                   width="300"
                   height="300"
@@ -34,7 +34,7 @@ function PostSeven(props) {
 
                   <LazyLoadImage
                     alt="post_image"
-                    src={`${process.env.PUBLIC_URL + '/' + post.image[0]}`}
+                    src={`https://placeimg.com/300/300/any`}
                     threshold={500}
                     effect="blur"
                     width={300}
@@ -48,11 +48,11 @@ function PostSeven(props) {
           <figure className="entry-media">
             <OwlCarousel
               adClass="owl-simple owl-light owl-nav-inside cols-1"
-              carouselId={'post_seven' + post.id}
+              carouselId={'post_seven' + post._id}
             >
               {post.image.map((item, index) => (
                 <Link
-                  to={`${process.env.PUBLIC_URL}/blog/post/${post.id}`}
+                  to={`${process.env.PUBLIC_URL}/blog/post/${post._id}`}
                   key={index}
                 >
                   {isIsotope ? (
@@ -86,10 +86,10 @@ function PostSeven(props) {
           </figure>
         ) : (
           <figure className="entry-media">
-            <Link to={`${process.env.PUBLIC_URL}/blog/post/${post.id}`}>
+            <Link to={`${process.env.PUBLIC_URL}/blog/post/${post._id}`}>
               {isIsotope ? (
                 <img
-                  src={`${process.env.PUBLIC_URL + '/' + post.image[0]}`}
+                  src={`https://placeimg.com/300/300/any`}
                   alt="post_image"
                   width="300"
                   height="300"
@@ -100,7 +100,7 @@ function PostSeven(props) {
 
                   <LazyLoadImage
                     alt="post_image"
-                    src={`${process.env.PUBLIC_URL + '/' + post.image[0]}`}
+                    src={`https://placeimg.com/300/300/any`}
                     threshold={500}
                     effect="blur"
                     width={300}
@@ -116,28 +116,28 @@ function PostSeven(props) {
           <div className="entry-meta">
             <Link to="#">{date.toLocaleDateString('en-US', options)}</Link>
             <span className="meta-separator">|</span>
-            <Link to="#">{post.comments} Comments</Link>
+            <Link to="#">{post.comments.length} Comments</Link>
           </div>
 
           <h2 className="entry-title">
-            <Link to={`${process.env.PUBLIC_URL}/blog/post/${post.id}`}>
+            <Link to={`${process.env.PUBLIC_URL}/blog/post/${post._id}`}>
               {post.title}
             </Link>
           </h2>
 
           <div className="entry-cats">
             in&nbsp;
-            {post.category.map((cat, index) => (
+            {post.categories.map((cat, index) => (
               <span key={index}>
                 <Link to="#">{cat}</Link>
-                {index < post.category.length - 1 ? ', ' : ''}
+                {index < post.categories.length - 1 ? ', ' : ''}
               </span>
             ))}
           </div>
           <div className="entry-content">
             <p>{post.content}</p>
             <Link
-              to={`${process.env.PUBLIC_URL}/blog/post/${post.id}`}
+              to={`${process.env.PUBLIC_URL}/blog/post/${post._id}`}
               className="read-more"
             >
               Continue Reading
