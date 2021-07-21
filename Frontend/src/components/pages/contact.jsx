@@ -1,11 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import axios from 'axios'
 
 import Layout from '../app'
 import Breadcrumb from '../common/breadcrumb'
 
 function ContactOne() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
+
+  const sendMessage = e => {
+    e.preventDefault()
+
+    axios.post(`${process.env.REACT_APP_API_URL}/contact`, {
+      name,
+      email,
+      phone,
+      subject,
+      text: message,
+    })
+
+    setName('')
+    setPhone('')
+    setPhone('')
+    setSubject('')
+    setMessage('')
+  }
+
   return (
     <Layout>
       <div className="main">
@@ -105,6 +130,8 @@ function ContactOne() {
                         id="cname"
                         placeholder="Name *"
                         required
+                        onInput={e => setName(e.target.value)}
+                        value={name}
                       />
                     </div>
 
@@ -118,6 +145,8 @@ function ContactOne() {
                         id="cemail"
                         placeholder="Email *"
                         required
+                        onInput={e => setEmail(e.target.value)}
+                        value={email}
                       />
                     </div>
                   </div>
@@ -132,6 +161,8 @@ function ContactOne() {
                         className="form-control"
                         id="cphone"
                         placeholder="Phone"
+                        onInput={e => setPhone(e.target.value)}
+                        value={phone}
                       />
                     </div>
 
@@ -144,6 +175,8 @@ function ContactOne() {
                         className="form-control"
                         id="csubject"
                         placeholder="Subject"
+                        onInput={e => setSubject(e.target.value)}
+                        value={subject}
                       />
                     </div>
                   </div>
@@ -158,11 +191,14 @@ function ContactOne() {
                     id="cmessage"
                     required
                     placeholder="Message *"
+                    onInput={e => setMessage(e.target.value)}
+                    value={message}
                   ></textarea>
 
                   <button
                     type="submit"
                     className="btn btn-outline-primary-2 btn-minwidth-sm"
+                    onClick={sendMessage}
                   >
                     <span>SUBMIT</span>
                     <i className="icon-long-arrow-right"></i>

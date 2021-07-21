@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --watch",
     "test:prod": "yarn && jest",
-    "start": "nodemon src/index"
+    "start": "env-cmd nodemon src/index"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +14,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.4.5",
     "bcryptjs": "^2.4.3",
+    "env-cmd": "10.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.0",
