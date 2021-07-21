@@ -62,6 +62,7 @@
     "react-router-dom": "^4.3.1",
     "react-router-scroll-4": "^1.0.0-beta.2",
     "react-slide-toggle": "^0.1.13",
+    "react-slugify": "^2.0.3",
     "react-sticky-box": "^0.9.3",
     "react-tabs": "^2.3.1",
     "react-toastify": "^4.5.2",

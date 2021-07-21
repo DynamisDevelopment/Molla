@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import slugify from 'react-slugify'
 
 function CategoryMenu() {
   function onShowMenu(e) {
@@ -60,10 +61,7 @@ function CategoryMenu() {
 
 const Category = ({ name, banner, icon, children, i }) => (
   <li className="megamenu-container" key={i}>
-    <Link
-      className="sf-with-ul"
-      to={`/shop/list?product=${name.replace(/'\s'/g, '-')}`}
-    >
+    <Link className="sf-with-ul" to={`/shop/list?product=${slugify(name)}`}>
       <i className={icon}></i>
       {name}
     </Link>
@@ -85,10 +83,7 @@ const Category = ({ name, banner, icon, children, i }) => (
                             to={
                               child.link
                                 ? child.link
-                                : `/shop/list?product=${child.name.replace(
-                                    ' ',
-                                    '-'
-                                  )}`
+                                : `/shop/list?product=${slugify(child.name)}`
                             }
                           >
                             {child.strong ? (

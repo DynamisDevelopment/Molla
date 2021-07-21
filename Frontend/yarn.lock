@@ -9193,6 +9193,11 @@ react-slide-toggle@^0.1.13:
   resolved "https://registry.yarnpkg.com/react-slide-toggle/-/react-slide-toggle-0.1.13.tgz#8c8916eeb402c626d02b3ae7750ad0dac6ebf638"
   integrity sha512-u1U8X1NrrCUQyDd4Q+TinMy65ZlIxKTrGhJ7hPPJKkl8TSjVCFLunDoFV+qoa4QtBtABkvkoPwTB84M0kZtMpg==
 
+react-slugify@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-slugify/-/react-slugify-2.0.3.tgz#b42528a6d67519c6b99a78368ff2159ea8e67709"
+  integrity sha512-ZsKIECbHNS3EZJ13ArN3n+KHqj77l7B0Y6gzI3W9sz/jNoREUY23VfZJ0626zPQ5uGZv75pnZBmAanG49dOBGg==
+
 react-sticky-box@^0.9.3:
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/react-sticky-box/-/react-sticky-box-0.9.3.tgz#8450d4cef8e4fdd7b0351520365bc98c97da11af"
