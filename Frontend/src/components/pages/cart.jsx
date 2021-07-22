@@ -94,7 +94,7 @@ function Cart(props) {
                                       src={
                                         process.env.PUBLIC_URL +
                                         '/' +
-                                        item.pictures[0]
+                                        item.assets[0]
                                       }
                                       alt="Product"
                                     />

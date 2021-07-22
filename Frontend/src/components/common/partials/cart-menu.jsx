@@ -65,10 +65,8 @@ function CartMenu(props) {
                       className="product-image"
                     >
                       <img
-                        src={process.env.PUBLIC_URL + '/' + item.pictures[0]}
-                        data-oi={
-                          process.env.PUBLIC_URL + '/' + item.pictures[0]
-                        }
+                        src={process.env.PUBLIC_URL + '/' + item.assets[0]}
+                        data-oi={process.env.PUBLIC_URL + '/' + item.assets[0]}
                         alt="product"
                       />
                     </Link>

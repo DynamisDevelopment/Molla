@@ -97,72 +97,52 @@ function ProductDetailSix(props) {
         <p>{product.shortDesc}</p>
       </div>
 
-      {product.variants ? (
+      {product.colors.length > 0 && (
         <div className="details-filter-row details-row-size">
           <label>Color:</label>
-          {product.variants[0].color ? (
-            <div className="product-nav product-nav-dots">
-              {product.variants.map((vari, i) => (
-                <Link
-                  to="#"
-                  key={i}
-                  className={0 === i ? 'active' : ''}
-                  style={{ backgroundColor: vari.color }}
-                ></Link>
-              ))}
-            </div>
+          <div className="product-nav product-nav-dots">
+            {product.colors.map((color, i) => (
+              <Link
+                to="#"
+                key={i}
+                className={0 === i ? 'active' : ''}
+                style={{ backgroundColor: color }}
+              ></Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {product.sizes.length > 0 && (
+        <div className="details-filter-row details-row-size">
+          <label htmlFor="size">Size:</label>
+          <div className="select-custom">
+            <select
+              name="size"
+              id="size"
+              className="form-control"
+              defaultValue="#"
+            >
+              {product.sizes.map(
+                (size, i) =>
+                  size.inventory > 0 && (
+                    <option value={size.name} key={i}>
+                      {size.name.toUpperCase()}
+                    </option>
+                  )
+              )}
+            </select>
+          </div>
+
+          {'default' === type ? (
+            <Link to="#" className="size-guide">
+              <i className="icon-th-list"></i>size guide
+            </Link>
           ) : (
-            <div className="product-nav product-nav-thumbs">
-              {product.variants[0].model
-                ? product.variants.map((vari, i) => (
-                    <Link to="#" key={i} className={0 === i ? 'active' : ''}>
-                      <img
-                        src={process.env.PUBLIC_URL + '/' + vari.model}
-                        alt="product desc"
-                      />
-                    </Link>
-                  ))
-                : product.variants[0].image
-                ? product.variants.map((vari, i) => (
-                    <Link to="#" key={i} className={0 === i ? 'active' : ''}>
-                      <img
-                        src={process.env.PUBLIC_URL + '/' + vari.image}
-                        alt="product desc"
-                      />
-                    </Link>
-                  ))
-                : ''}
-            </div>
+            ''
           )}
         </div>
-      ) : (
-        ''
       )}
-      <div className="details-filter-row details-row-size">
-        <label htmlFor="size">Size:</label>
-        <div className="select-custom">
-          <select
-            name="size"
-            id="size"
-            className="form-control"
-            defaultValue="#"
-          >
-            <option value="#">Select a size</option>
-            <option value="s">Small</option>
-            <option value="m">Medium</option>
-            <option value="l">Large</option>
-            <option value="xl">Extra Large</option>
-          </select>
-        </div>
-
-        {'default' === type ? (
-          <Link to="#" className="size-guide">
-            <i className="icon-th-list"></i>size guide
-          </Link>
-        ) : (
-          ''
-        )}
-      </div>
 
       <div className="details-filter-row details-row-size">
         <label htmlFor="qty">Qty:</label>
@@ -228,7 +208,7 @@ function ProductDetailSix(props) {
             <span>categories: </span>
             {product.categories.map((cat, index) => (
               <span key={index} className="mr-0">
-                <Link to="#">{cat}</Link>
+                <Link to="#">{cat.replaceAll('-', ' ')}</Link>
                 {index < product.categories.length - 1 ? ', ' : ''}
               </span>
             ))}
