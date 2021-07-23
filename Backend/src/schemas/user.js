@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true },
+    username: { type: String, required: true, trim: true },
     email: {
       type: String,
       required: true,
@@ -15,22 +16,30 @@ const userSchema = new mongoose.Schema(
         if (!validator.isEmail(val)) throw new Error('Email is invalid')
       },
     },
-    age: {
-      type: Number,
-      default: 0,
-      validate(val) {
-        if (val < 18) throw new Error('Must be an adult')
-      },
-    },
+    picture: Buffer,
     password: {
       type: String,
       required: true,
       minlength: 7,
       trim: true,
-      validate(val) {
-        if (val.toLowerCase().includes('password'))
-          throw new Error("Password cannot contain the password 'password'")
-      },
+    },
+    orders: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'Order',
+    },
+    billingAddress: {
+      name: String,
+      addressOne: String,
+      addressTwo: String,
+      phone: String,
+      email: String,
+    },
+    shippingAddress: {
+      name: String,
+      addressOne: String,
+      addressTwo: String,
+      phone: String,
+      email: String,
     },
     tokens: [
       {

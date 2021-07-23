@@ -45,10 +45,6 @@ function DashBoard() {
                         </Tab>
 
                         <Tab className="nav-item">
-                          <span className="nav-link">Downloads</span>
-                        </Tab>
-
-                        <Tab className="nav-item">
                           <span className="nav-link">Addresses</span>
                         </Tab>
 
@@ -107,20 +103,9 @@ function DashBoard() {
                         </TabPanel>
 
                         <TabPanel>
-                          <p>No order has been made yet.</p>
+                          <p>No orders have been made yet.</p>
                           <Link
                             to={`${process.env.PUBLIC_URL}/shop`}
-                            className="btn btn-outline-primary-2"
-                          >
-                            <span>GO SHOP</span>
-                            <i className="icon-long-arrow-right"></i>
-                          </Link>
-                        </TabPanel>
-
-                        <TabPanel>
-                          <p>No downloads available yet.</p>
-                          <Link
-                            to={`${process.env.PUBLIC_URL}/shop/sidebar/list`}
                             className="btn btn-outline-primary-2"
                           >
                             <span>GO SHOP</span>
