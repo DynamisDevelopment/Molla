@@ -49,29 +49,30 @@ const userSchema = new mongoose.Schema(
         },
       },
     ],
-    avatar: {
-      type: Buffer,
-    },
   },
   {
     timestamps: true,
   }
 )
 
-userSchema.methods.toJSON = function () {
-  const user = this
+// userSchema.methods.toJSON = function () {
+//   const user = this
 
-  const userObj = user.toObject()
-  delete userObj.password
-  delete userObj.tokens
-  delete userObj.avatar
+//   const userObj = user.toObject()
+//   delete userObj.password
+//   delete userObj.tokens
+//   delete userObj.avatar
 
-  return userObj
-}
+//   return userObj
+// }
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this
-  const token = jwt.sign({ _id: user._id.toString() }, 'ThisIsMySecret324@!')
+  const token = jwt.sign(
+    { _id: user._id.toString() },
+    process.env.TOKEN_SECRET,
+    { expiresIn: '6 hours' }
+  )
 
   user.tokens = user.tokens.concat({ token })
   await user.save()
@@ -79,8 +80,11 @@ userSchema.methods.generateAuthToken = async function () {
   return token
 }
 
-userSchema.statics.findByCredentials = async (email, password) => {
-  const user = await User.findOne({ email })
+userSchema.statics.findByCredentials = async (email, username, password) => {
+  const user = email
+    ? await User.findOne({ email })
+    : await User.findOne({ username })
+
   if (!user) throw new Error('No User Found')
 
   const isMatch = await bcrypt.compare(password, user.password)
