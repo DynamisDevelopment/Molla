@@ -14,8 +14,8 @@ const localReviewRouter = require('./routers/reviews')
 const localCommentRouter = require('./routers/comments')
 const localMiscRouter = require('./routers/misc')
 
-mongooseConnect('mollaTinker')
-mongoose.connect(`mongodb://127.0.0.1:27017/mollaTinker`, {
+mongooseConnect(process.env.MONGODB_URL)
+mongoose.connect(`mongodb://127.0.0.1:27017/${process.env.MONGODB_URL}`, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,

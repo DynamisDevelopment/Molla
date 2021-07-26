@@ -1,9 +1,10 @@
 const request = require('supertest')
 const app = require('../app')
 const Review = require('mt-routes-schemas').Review
-const { setupDatabase, reviewId } = require('mt-routes-schemas')
+const { setupDB } = require('../utils')
+const { reviewId } = require('mt-routes-schemas')
 
-beforeEach(setupDatabase)
+beforeEach(setupDB)
 
 describe('Reviews', () => {
   test('Adds Helpful', async () => {

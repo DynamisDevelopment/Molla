@@ -21,19 +21,21 @@ const contact = ({ email, name, phone, subject, text }) => {
 }
 
 const sendWelcomeEmail = (email, name) => {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  if (process.env.STAGE !== 'test') {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-  return sgMail
-    .send({
-      to: email,
-      from: 'dynamisdev3248@gmail.com',
-      subject: 'Thanks for shopping at Molla!',
-      text: `
+    return sgMail
+      .send({
+        to: email,
+        from: 'dynamisdev3248@gmail.com',
+        subject: 'Thanks for shopping at Molla!',
+        text: `
        Thank you ${name.split(' ')[0]} for shopping at Molla.
       `,
-    })
-    .then(() => 'success')
-    .catch(err => console.log(err))
+      })
+      .then(() => 'success')
+      .catch(err => console.log(err))
+  }
 }
 
 module.exports = {

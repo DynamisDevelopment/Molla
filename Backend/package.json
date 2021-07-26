@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch",
+    "test": "env-cmd -e test jest --watch --runInBand",
     "test:prod": "yarn && jest",
-    "start": "env-cmd nodemon src/index"
+    "start": "env-cmd -e dev  nodemon src/index"
   },
   "keywords": [],
   "author": "",

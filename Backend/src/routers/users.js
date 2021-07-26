@@ -41,7 +41,7 @@ router.post('/user/logout', auth, async (req, res) => {
   complete(async () => {
     req.user.tokens = req.user.tokens.filter(token => token.token !== req.token)
     await req.user.save()
-    res.send()
+    res.send(req.user)
   }, res)
 })
 
@@ -71,12 +71,10 @@ router.patch('/user/me', auth, async (req, res) => {
 })
 
 router.delete('/user/me', auth, async (req, res) => {
-  try {
+  complete(async () => {
     await req.user.remove()
-    res.send(user)
-  } catch (err) {
-    res.status(500).send()
-  }
+    res.send(req.user)
+  }, res)
 })
 
 module.exports = router

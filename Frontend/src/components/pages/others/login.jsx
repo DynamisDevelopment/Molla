@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import Layout from '../../app'
 import Breadcrumb from '../../common/breadcrumb'
 
-function LoginOne() {
+const LoginOne = () => {
   return (
     <Layout>
       <div className="main">
